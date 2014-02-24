@@ -3,7 +3,7 @@ from socket import *
 
 endmsg = "\r\n.\r\n"
 # Choose a mail server (e.g. Google mail server) and call it mailserver
-mailserver = "smtp.stud.ntnu.no" #Fill in start   #Fill in end
+mailserver = "10.0.0.2" #Fill in start   #Fill in end
 # Create socket called clientSocket and establish a TCP connection with mailserver
 #Fill in start
 clientSocket = socket(AF_INET, SOCK_STREAM)
@@ -15,7 +15,7 @@ if recv[:3] != '220':
 	print '220 reply not received from server.'
 
 # Send HELO command and print server response.
-heloCommand = 'HELO Alice\r\n'
+heloCommand = 'EHLO Alice\r\n'
 clientSocket.send(heloCommand)
 recv1 = clientSocket.recv(1024)
 print recv1
@@ -25,13 +25,13 @@ if recv1[:3] != '250':
 clientSocket.send("AUTH LOGIN\r\n")
 recv1_1 = clientSocket.recv(1024)
 print recv1_1
- 
+
 print "Enter Username"
 user = raw_input()
 clientSocket.send(base64.b64encode(user)+"\r\n")
 recv1_2 = clientSocket.recv(1024)
 print recv1_2
- 
+
 print "Enter Password"
 psw = getpass.getpass()
 clientSocket.send(base64.b64encode(psw)+"\r\n")
@@ -39,7 +39,6 @@ recv1_3 = clientSocket.recv(1024)
 print recv1_3
 recv1_4 = clientSocket.recv(1024)
 print recv1_4
-
 # Send MAIL FROM command and print server response.
 # Fill in start
 MAILFROM = "MAIL FROM: <"

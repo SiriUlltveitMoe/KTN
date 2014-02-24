@@ -13,7 +13,7 @@ except Exception,e:
     n=4
     timeout = 1
 
-serverName = 'localhost'
+serverName = '10.0.0.2'
 serverPort = 12000
 
 clientSocket = socket(AF_INET, SOCK_DGRAM)
