@@ -3,7 +3,7 @@ from socket import *
 
 endmsg = "\r\n.\r\n"
 # Choose a mail server (e.g. Google mail server) and call it mailserver
-mailserver = "10.0.0.2" #Fill in start   #Fill in end
+mailserver = "smtp.stud.ntnu.no" #Fill in start   #Fill in end
 # Create socket called clientSocket and establish a TCP connection with mailserver
 #Fill in start
 clientSocket = socket(AF_INET, SOCK_STREAM)
@@ -22,23 +22,24 @@ print recv1
 if recv1[:3] != '250':
 	print '250 reply not received from server.'
 
-clientSocket.send("AUTH LOGIN\r\n")
-recv1_1 = clientSocket.recv(1024)
-print recv1_1
+# clientSocket.send("AUTH LOGIN\r\n")
+# recv1_1 = clientSocket.recv(1024)
+# print recv1_1
+# 
+# print "Enter Username"
+# user = raw_input()
+# clientSocket.send(base64.b64encode(user)+"\r\n")
+# recv1_2 = clientSocket.recv(1024)
+# print recv1_2
+# 
+# print "Enter Password"
+# psw = getpass.getpass()
+# clientSocket.send(base64.b64encode(psw)+"\r\n")
+# recv1_3 = clientSocket.recv(1024)
+# print recv1_3
+# recv1_4 = clientSocket.recv(1024)
+# print recv1_4
 
-print "Enter Username"
-user = raw_input()
-clientSocket.send(base64.b64encode(user)+"\r\n")
-recv1_2 = clientSocket.recv(1024)
-print recv1_2
-
-print "Enter Password"
-psw = getpass.getpass()
-clientSocket.send(base64.b64encode(psw)+"\r\n")
-recv1_3 = clientSocket.recv(1024)
-print recv1_3
-recv1_4 = clientSocket.recv(1024)
-print recv1_4
 # Send MAIL FROM command and print server response.
 # Fill in start
 MAILFROM = "MAIL FROM: <"
@@ -74,11 +75,11 @@ print recv4
 if recv4[:3] != '354':
 	print '354 reply not received from server.'
 # Fill in end
-clientSocket.send("To: "+sender+"\r\n")
-clientSocket.send("From: "+rcpt+"\r\n")
+clientSocket.send("To: "+rcpt+"\n")
+clientSocket.send("From: "+sender+"\n")
 print "Enter Subject:"
 subj = raw_input()
-clientSocket.send("Subject: "+subj+"\r\n\r\n")
+clientSocket.send("Subject: "+subj+"\n")
 # Send message data.
 # Fill in start
 print "Write message (end with \"END\"):"
